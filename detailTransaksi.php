@@ -75,11 +75,6 @@ if (!$data) {
         <br>
 
         <div class="row">
-            <div class="label">ID Transaksi</div>
-            <div class="value"><?= htmlspecialchars($data['id']) ?></div>
-        </div>
-
-        <div class="row">
             <div class="label">Tanggal</div>
             <div class="value"><?= htmlspecialchars($data['tanggal_tampil'] ?? '-') ?></div>
         </div>

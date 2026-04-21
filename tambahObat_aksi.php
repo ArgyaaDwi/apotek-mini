@@ -1,15 +1,31 @@
 <?php
 include 'konek.php';
 
-$namaObat = $_POST['nama_obat'];
-$kategoriId = $_POST['kategori_id'];
-$harga = $_POST['harga'];
-$stok = $_POST['stok'];
-$deskripsi = $_POST['deskripsi'];
+$namaObat = isset($_POST['nama_obat']) ? trim($_POST['nama_obat']) : '';
+$kategoriId = isset($_POST['kategori_id']) ? (int) $_POST['kategori_id'] : 0;
+$harga = isset($_POST['harga']) ? (float) $_POST['harga'] : 0;
+$stok = isset($_POST['stok']) ? (int) $_POST['stok'] : 0;
+$deskripsi = isset($_POST['deskripsi']) ? trim($_POST['deskripsi']) : '';
 
-$sql = "INSERT INTO obat (nama_obat, kategori_id, harga, stok, deskripsi)
-VALUES ('$namaObat', $kategoriId, $harga, $stok, '$deskripsi')";
+if ($namaObat === '' || $kategoriId <= 0 || $harga < 0 || $stok < 0) {
+    die('Data obat tidak valid. Stok dan harga tidak boleh minus.');
+}
 
-$db_conn->query($sql);
+try {
+    $sql = "INSERT INTO obat (nama_obat, kategori_id, harga, stok, deskripsi)
+            VALUES (:nama_obat, :kategori_id, :harga, :stok, :deskripsi)";
 
-header("location:index.php");
+    $stmt = $db_conn->prepare($sql);
+    $stmt->execute([
+        ':nama_obat' => $namaObat,
+        ':kategori_id' => $kategoriId,
+        ':harga' => $harga,
+        ':stok' => $stok,
+        ':deskripsi' => $deskripsi,
+    ]);
+
+    header('Location: index.php');
+    exit;
+} catch (Exception $e) {
+    die('Gagal menambah obat: ' . $e->getMessage());
+}

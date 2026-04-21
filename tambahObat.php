@@ -53,11 +53,11 @@
                 </tr>
                 <tr>
                     <td>Harga</td>
-                    <td><input type="number" name="harga" required placeholder="Harga"></td>
+                    <td><input type="number" min="0" name="harga" required placeholder="Harga"></td>
                 </tr>
                 <tr>
                     <td>Stok</td>
-                    <td><input type="number" name="stok" required placeholder="Stok"></td>
+                    <td><input type="number" name="stok" min="0" required placeholder="Stok"></td>
                 </tr>
                 <tr>
                     <td>Deskripsi</td>

@@ -3,26 +3,7 @@
 
 <head>
     <title>Apotek Mini</title>
-    <style>
-        body {
-            font-family: Poppins;
-        }
-
-        .container {
-            border: 1px solid lightgray;
-            width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .judul {
-            text-align: center;
-        }
-
-        .tabel {
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="css/global.css">
 </head>
 
 <body>
@@ -30,7 +11,6 @@
         <h2 class="judul">Apotek Mini - PostgreSQL</h2>
         <br />
         <?php include 'konek.php'; ?>
-
         <br />
         <a href="tambahKategori.php">Tambah Kategori</a>
         <br />
@@ -45,7 +25,6 @@
             $noKategori = 1;
             $sqlKategori = "SELECT id, nama_kategori FROM kategori ORDER BY id ASC";
             $resultKategori = $db_conn->query($sqlKategori);
-
             while ($kategori = $resultKategori->fetch(PDO::FETCH_ASSOC)) {
             ?>
                 <tr>
@@ -65,12 +44,10 @@
             }
             ?>
         </table>
-
         <br />
         <br>
         <a href="tambahObat.php">Tambah Obat</a>
         <br />
-
         <h3>Data Obat</h3>
         <table border='1' class="tabel">
             <tr>
@@ -90,7 +67,6 @@
                         JOIN kategori ON obat.kategori_id = kategori.id
                         ORDER BY obat.id ASC";
             $resultObat = $db_conn->query($sqlObat);
-
             while ($obat = $resultObat->fetch(PDO::FETCH_ASSOC)) {
             ?>
                 <tr>
@@ -126,11 +102,11 @@
                 <th>No</th>
                 <th>Tanggal Transaksi</th>
                 <th>Nama Pembeli</th>
-                <th>Alamat</th>
                 <th>Nama Obat</th>
                 <th>Jumlah</th>
                 <th>Harga</th>
                 <th>Subtotal</th>
+                <th>Aksi</th>
             </tr>
             <?php
             $noTransaksi = 1;
@@ -154,18 +130,24 @@
                     <td><?php echo $noTransaksi++; ?></td>
                     <td><?php echo htmlspecialchars($transaksi['tanggal_tampil'] ?? '-'); ?></td>
                     <td><?php echo htmlspecialchars($transaksi['nama_pembeli']); ?></td>
-                    <td><?php echo htmlspecialchars($transaksi['alamat']); ?></td>
                     <td><?php echo htmlspecialchars($transaksi['nama_obat']); ?></td>
                     <td><?php echo htmlspecialchars($transaksi['jumlah']); ?></td>
                     <td><?php echo htmlspecialchars($transaksi['harga']); ?></td>
                     <td><?php echo htmlspecialchars($transaksi['subtotal']); ?></td>
+                    <td>
+                        <a href="detailTransaksi.php?id=<?php echo $transaksi['id']; ?>" style="color: blue;">Detail</a>
+                        <a href="deleteTransaksi.php?id=<?php echo $transaksi['id']; ?>"
+                            onclick="return confirm('Yakin mau hapus transaksi ini?')"
+                            style="color:red;">
+                            Hapus
+                        </a>
+                    </td>
                 </tr>
             <?php
             }
             ?>
         </table>
     </div>
-
 </body>
 
 </html>

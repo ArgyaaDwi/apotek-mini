@@ -62,11 +62,11 @@
                     </tr>
                     <tr>
                         <td>Harga</td>
-                        <td><input type="number" name="harga" value="<?php echo $row['harga']; ?>"></td>
+                        <td><input type="number" name="harga" min="0" value="<?php echo $row['harga']; ?>"></td>
                     </tr>
                     <tr>
                         <td>Stok</td>
-                        <td><input type="number" name="stok" value="<?php echo $row['stok']; ?>"></td>
+                        <td><input type="number" name="stok" min="0" value="<?php echo $row['stok']; ?>"></td>
                     </tr>
                     <tr>
                         <td>Deskripsi</td>

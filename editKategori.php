@@ -42,7 +42,7 @@
                         <td>Nama Kategori</td>
                         <td>
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                            <input type="text" name="nama_kategori" value="<?php echo $row['nama_kategori']; ?>">
+                            <input type="text" name="nama_kategori" value="<?php echo htmlspecialchars($row['nama_kategori']); ?>" required>
                         </td>
                     </tr>
                     <tr>

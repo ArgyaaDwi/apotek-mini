@@ -1,11 +1,24 @@
 <?php
-
 include 'konek.php';
 
-$ID = $_POST['id'];
-$namaKategori = $_POST['nama_kategori'];
+$ID = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+$namaKategori = isset($_POST['nama_kategori']) ? trim($_POST['nama_kategori']) : '';
 
-$sql = "UPDATE kategori SET nama_kategori='$namaKategori' WHERE id = $ID";
-$result = $db_conn->query($sql);
+if ($ID <= 0 || $namaKategori === '') {
+    die('Data kategori tidak valid.');
+}
 
-header("location:index.php");
+try {
+    $sql = "UPDATE kategori SET nama_kategori = :nama_kategori WHERE id = :id";
+
+    $stmt = $db_conn->prepare($sql);
+    $stmt->execute([
+        ':nama_kategori' => $namaKategori,
+        ':id' => $ID,
+    ]);
+
+    header('Location: index.php');
+    exit;
+} catch (Exception $e) {
+    die('Gagal mengupdate kategori: ' . $e->getMessage());
+}
