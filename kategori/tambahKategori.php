@@ -1,3 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +12,6 @@
     <style>
         body {
             font-family: Poppins;
-
         }
 
         .container {
@@ -26,7 +31,7 @@
     <div class="container">
         <h2 class="judul">Apotek Mini - PostgreSQL</h2>
         <br />
-        <a href="index.php">KEMBALI</a>
+        <a href="../index.php">KEMBALI</a>
         <br />
         <h3>Tambah Data Kategori</h3>
         <form method="post" action="tambahKategori_aksi.php">

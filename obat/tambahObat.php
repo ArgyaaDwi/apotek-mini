@@ -1,3 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +32,7 @@
     <div class="container">
         <h2 class="judul">Apotek Mini - PostgreSQL</h2>
         <br />
-        <a href="index.php">KEMBALI</a>
+        <a href="../index.php">KEMBALI</a>
         <br />
         <h3>Tambah Data Obat</h3>
         <form method="post" action="tambahObat_aksi.php">
@@ -41,7 +47,6 @@
                         <select name="kategori_id" required>
                             <option value="">Pilih Kategori</option>
                             <?php
-                            include 'konek.php';
                             $sql = "SELECT * FROM kategori";
                             $result = $db_conn->query($sql);
                             while ($row = $result->fetch()) {

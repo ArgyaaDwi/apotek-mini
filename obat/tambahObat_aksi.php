@@ -1,5 +1,8 @@
 <?php
-include 'konek.php';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
 
 $namaObat = isset($_POST['nama_obat']) ? trim($_POST['nama_obat']) : '';
 $kategoriId = isset($_POST['kategori_id']) ? (int) $_POST['kategori_id'] : 0;
@@ -24,7 +27,7 @@ try {
         ':deskripsi' => $deskripsi,
     ]);
 
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 } catch (Exception $e) {
     die('Gagal menambah obat: ' . $e->getMessage());

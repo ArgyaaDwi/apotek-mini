@@ -1,5 +1,8 @@
 <?php
-include 'konek.php';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
 
 $ID = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 $namaObat = isset($_POST['nama_obat']) ? trim($_POST['nama_obat']) : '';
@@ -31,7 +34,7 @@ try {
         ':id' => $ID,
     ]);
 
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 } catch (Exception $e) {
     die('Gagal mengupdate obat: ' . $e->getMessage());

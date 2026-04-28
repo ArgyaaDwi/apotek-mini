@@ -1,5 +1,8 @@
 <?php
-include 'konek.php';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
@@ -71,7 +74,7 @@ if (!$data) {
 <body>
     <div class="container">
         <h2>Detail Transaksi</h2>
-        <a href="index.php">KEMBALI</a>
+        <a href="../index.php">KEMBALI</a>
         <br>
 
         <div class="row">
@@ -96,17 +99,17 @@ if (!$data) {
 
         <div class="row">
             <div class="label">Jumlah</div>
-            <div class="value"><?= htmlspecialchars($data['jumlah'] ?? '-') ?></div>
+            <div class="value"><?= htmlspecialchars((string) ($data['jumlah'] ?? '-')) ?></div>
         </div>
 
         <div class="row">
             <div class="label">Harga</div>
-            <div class="value"><?= htmlspecialchars($data['harga'] ?? '-') ?></div>
+            <div class="value"><?= htmlspecialchars((string) ($data['harga'] ?? '-')) ?></div>
         </div>
 
         <div class="row">
             <div class="label">Subtotal</div>
-            <div class="value"><?= htmlspecialchars($data['subtotal'] ?? '-') ?></div>
+            <div class="value"><?= htmlspecialchars((string) ($data['subtotal'] ?? '-')) ?></div>
         </div>
     </div>
 </body>

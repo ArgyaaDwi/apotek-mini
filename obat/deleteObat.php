@@ -1,5 +1,8 @@
 <?php
-include 'konek.php';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
@@ -26,5 +29,5 @@ try {
     die('Gagal menghapus obat: ' . $e->getMessage());
 }
 
-header('Location: index.php');
+header('Location: ../index.php');
 exit;

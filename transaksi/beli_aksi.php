@@ -1,5 +1,13 @@
 <?php
-include 'konek.php';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
+
+// Temporary debugging: show errors to help diagnose server-side issues.
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 $obat_id = isset($_POST['obat_id']) ? (int) $_POST['obat_id'] : 0;
 $nama = isset($_POST['nama_pembeli']) ? trim($_POST['nama_pembeli']) : '';
@@ -12,8 +20,6 @@ if ($obat_id <= 0 || $jumlah <= 0 || $nama === '' || $alamat === '') {
 
 try {
     $db_conn->beginTransaction();
-
-    // Kunci baris obat agar stok aman saat transaksi bersamaan.
     $stmtObat = $db_conn->prepare("SELECT id, stok, harga FROM obat WHERE id = :id FOR UPDATE");
     $stmtObat->execute([':id' => $obat_id]);
     $obat = $stmtObat->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +58,7 @@ try {
     }
 
     $db_conn->commit();
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit;
 } catch (Exception $e) {
     if ($db_conn->inTransaction()) {

@@ -1,41 +1,45 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Apotek Mini</title>
-    <style>
-        body {
-            font-family: Poppins;
+declare(strict_types=1);
 
-        }
+require_once __DIR__ . '/../konek.php';
 
-        .container {
-            border: 1px solid lightgray;
-            width: 600px;
-            margin: auto;
-            padding: 20px;
-        }
+$id = $_GET['id'];
+$sql = "SELECT * FROM obat WHERE id = $id";
+$result = $db_conn->query($sql);
+while ($row = $result->fetch()) {
+    ?>
+    <!DOCTYPE html>
+    <html>
 
-        .judul {
-            text-align: center;
-        }
-    </style>
-</head>
+    <head>
+        <title>Apotek Mini</title>
+        <style>
+            body {
+                font-family: Poppins;
 
-<body>
-    <div class="container">
-        <h2 class="judul">Apotek Mini - PostgreSQL</h2>
-        <br />
-        <a href="index.php">KEMBALI</a>
-        <br />
-        <h3>Edit Obat</h3>
-        <?php
-        include 'konek.php';
-        $id = $_GET['id'];
-        $sql = "SELECT * FROM obat WHERE id = $id";
-        $result = $db_conn->query($sql);
-        while ($row = $result->fetch()) {
-        ?>
+            }
+
+            .container {
+                border: 1px solid lightgray;
+                width: 600px;
+                margin: auto;
+                padding: 20px;
+            }
+
+            .judul {
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h2 class="judul">Apotek Mini - PostgreSQL</h2>
+            <br />
+            <a href="../index.php">KEMBALI</a>
+            <br />
+            <h3>Edit Obat</h3>
             <form method="post" action="update.php">
                 <table>
                     <tr>
@@ -77,10 +81,9 @@
                     </tr>
                 </table>
             </form>
-        <?php
-        }
-        ?>
-    </div>
-</body>
+        </div>
+    </body>
 
-</html>
+    </html>
+    <?php
+}

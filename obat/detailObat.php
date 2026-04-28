@@ -1,5 +1,8 @@
 <?php
-include 'konek.php';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../konek.php';
 
 $id = $_GET['id'];
 $sql = "SELECT * FROM obat WHERE id = $id";
@@ -53,7 +56,7 @@ $data = $result->fetch();
 <body>
     <div class="container">
         <h2>Detail Obat</h2>
-        <a href="index.php">KEMBALI</a>
+        <a href="../index.php">KEMBALI</a>
         <br>
         <div class="row">
             <div class="label">Nama Obat</div>
